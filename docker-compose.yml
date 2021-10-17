@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+  backend:
+    build: .
+    command: uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8002
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "8002:8002"
+  mongodb-service:
+    image: mongo:5.0.2
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_volume:/data/db
+
+
+volumes:
+  mongodb_volume:
